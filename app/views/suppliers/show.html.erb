@@ -1,0 +1,21 @@
+<h1> <%= @supplier.brand_name %> </h1>
+<h4> <%= @supplier.corporate_name %> </h4>
+
+<ul>
+    <li>
+        CNPJ: <%= @supplier.registration_number %>
+    </li>
+    <li>
+        Endereço: <%= @supplier.full_address %> |  <%= @supplier.city %> - <%= @supplier.state %>
+    </li>
+    <li>
+        Contato: <%= @supplier.email %> 
+    </li>
+</ul>
+
+<div>
+  <%=link_to('Editar', edit_supplier_path(@supplier.id))%>
+  <%=button_to('Remover', supplier_path(@supplier.id), method: :delete)%>
+</div>
+
+
