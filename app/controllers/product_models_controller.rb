@@ -16,8 +16,15 @@ class ProductModelsController < ApplicationController
         product_model_params = params.require(:product_model).permit(:name, :weight, :width, :height, 
                                                                      :depth, :sku, :supplier, :supplier_id )
         @product_model = ProductModel.new(product_model_params)
-        @product_model.save
-        redirect_to @product_model, notice: 'Modelo de produto cadastrado com sucesso'
+
+        if @product_model.save
+            redirect_to @product_model, notice: 'Modelo de produto cadastrado com sucesso'
+        else 
+            @suppliers = Supplier.all
+            flash.now[:notice] = 'Não foi possível cadastrar o produto.'
+            render 'new'   
+        end
+
     end
 
 end

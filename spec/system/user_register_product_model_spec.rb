@@ -4,8 +4,10 @@ describe 'Usuário cadastra um modelo de produto' do
 
     it 'com sucesso' do
         #Arrange 
-        s = Supplier.create!(brand_name: 'Samsung', corporate_name:'Samsung Eletronicos LTDA', registration_number: '4512784579', 
-                             full_address: 'Av Nações Unidas, 1000', city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
+        s_1 = Supplier.create!(brand_name: 'Samsung', corporate_name:'Samsung Eletronicos LTDA', registration_number: '4512784579', 
+                               full_address: 'Av Nações Unidas, 1000', city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
+        s_2 = Supplier.create!(brand_name: 'LG', corporate_name:'LG Eletronicos LTDA', registration_number: '2451845651', 
+                               full_address: 'Av Ibirapuera, 300', city: 'São Paulo', state: 'SP', email: 'sac@lg.com.br')
 
         #Act
         visit root_path
@@ -17,7 +19,7 @@ describe 'Usuário cadastra um modelo de produto' do
         fill_in 'Largura', with: 90
         fill_in 'Profundidade', with: 10
         fill_in 'SKU', with: 'TV40-SAMS-XPTO'
-        select 'Samsung', from: 'Fornecedor'
+        select 'LG', from: 'Fornecedor'
         click_on 'Enviar'
 
         #Assert
@@ -26,8 +28,24 @@ describe 'Usuário cadastra um modelo de produto' do
         expect(page).to have_content 'SKU: TV40-SAMS-XPTO'
         expect(page).to have_content 'Dimensões: 90cm x 60cm x 10cm'
         expect(page).to have_content 'Peso: 10000g'
-        expect(page).to have_content 'Fornecedor: Samsung'
+        expect(page).to have_content 'Fornecedor: LG'
 
+    end
+
+    it 'e deve preencher todos os campos' do 
+        #Arrange 
+        s = Supplier.create!(brand_name: 'Samsung', corporate_name:'Samsung Eletronicos LTDA', registration_number: '4512784579', 
+                               full_address: 'Av Nações Unidas, 1000', city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
+
+        #Act
+        visit root_path
+        click_on "Modelos de Produto"
+        click_on "Cadastrar Novo"
+        fill_in 'Nome', with: ''
+        fill_in 'SKU', with: ''
+        click_on 'Enviar'
+
+        expect(page).to have_content 'Não foi possível cadastrar o produto.'
     end
 
 end
