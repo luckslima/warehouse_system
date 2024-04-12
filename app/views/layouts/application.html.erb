@@ -14,12 +14,19 @@
       <h1>Galpões & Estoque</h1>
       <nav>
         <%= link_to 'Fornecedores', suppliers_path %> |
-        <%= link_to 'Modelos de Produto', product_models_path %>
+        <%= link_to 'Modelos de Produto', product_models_path %> |
+        <% if user_signed_in? %>
+          <%= current_user.name %>
+          <%= link_to 'Sair', destroy_user_session_path %>
+        <% else %>
+          <%= link_to 'Entrar', new_user_session_path %>
+        <% end %>
       </nav>
     </header>
     
     <main>
       <div>
+        <%= alert %>
         <%= notice %>
       </div>
       
