@@ -4,12 +4,14 @@ describe 'Usuário cadastra um modelo de produto' do
 
     it 'com sucesso' do
         #Arrange 
+        user = User.create!(name: 'João', email: 'joao@email.com', password: 'password')
         s_1 = Supplier.create!(brand_name: 'Samsung', corporate_name:'Samsung Eletronicos LTDA', registration_number: '4512784579', 
                                full_address: 'Av Nações Unidas, 1000', city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
         s_2 = Supplier.create!(brand_name: 'LG', corporate_name:'LG Eletronicos LTDA', registration_number: '2451845651', 
                                full_address: 'Av Ibirapuera, 300', city: 'São Paulo', state: 'SP', email: 'sac@lg.com.br')
-
+        
         #Act
+        login_as(user)
         visit root_path
         click_on "Modelos de Produto"
         click_on "Cadastrar Novo"
@@ -34,10 +36,12 @@ describe 'Usuário cadastra um modelo de produto' do
 
     it 'e deve preencher todos os campos' do 
         #Arrange 
+        user = User.create!(name: 'João', email: 'joao@email.com', password: 'password')
         s = Supplier.create!(brand_name: 'Samsung', corporate_name:'Samsung Eletronicos LTDA', registration_number: '4512784579', 
                                full_address: 'Av Nações Unidas, 1000', city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
 
         #Act
+        login_as(user)
         visit root_path
         click_on "Modelos de Produto"
         click_on "Cadastrar Novo"
