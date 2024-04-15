@@ -1,5 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
- # pending "add some examples to (or delete) #{__FILE__}"
+    describe '#description' do
+        it 'exibe o nome e o email' do 
+            #Arrange
+            u = User.new(name: 'Julia', email: 'julia@yahoo.com')
+            #Act
+            result = u.description()
+
+            #Assert
+            expect(result).to eq ('Julia - julia@yahoo.com')
+
+        end
+    end
 end
