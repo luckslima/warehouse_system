@@ -18,4 +18,9 @@ class OrdersController < ApplicationController
     def show
         @order = Order.find(params[:id])
     end
+
+    def search
+        @code = params["query"]
+        @orders = Order.where("code LIKE ?", "%#{@code}%")
+    end
 end
