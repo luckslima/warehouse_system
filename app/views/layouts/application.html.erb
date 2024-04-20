@@ -21,6 +21,8 @@
 
         <% if user_signed_in? %>
 
+          <%= link_to 'Meus Pedidos', orders_path %>
+
           <%= form_with(url: search_orders_path, method: :get) do |f|%>
               <%= f.label :query, 'Buscar Pedido' %>
               <%= f.text_field :query %>
