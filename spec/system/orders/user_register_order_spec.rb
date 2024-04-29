@@ -44,6 +44,7 @@ describe 'Usuário cadastra o pedido' do
         expect(page).to have_content 'Código: ABC12345'
         expect(page).to have_content 'Galpão destino: GRU - Aeroporto SP'
         expect(page).to have_content 'Fornecedor: ACME LTDA'
+        expect(page).to have_content 'Situação do pedido: Pendente'
         expect(page).to have_content 'Usuário responsável: Sérgio - sergio@email.com'
         expect(page).to have_content 'Data prevista de entrega: 20/12/2024'
         
