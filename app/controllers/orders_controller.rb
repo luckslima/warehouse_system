@@ -48,6 +48,12 @@ class OrdersController < ApplicationController
 
     def delivered
         @order.delivered!
+        @order.order_items.each do |i|
+            i.quantity.times do
+                StockProduct.create!(order: @order, product_model: i.product_model, warehouse: @order.warehouse)
+            end
+
+        end
         redirect_to @order
     end
 

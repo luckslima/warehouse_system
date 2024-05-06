@@ -131,6 +131,30 @@ RSpec.describe Order, type: :model do
       
     end
 
+    it 'e não deve ser modificado' do
+      #Arrange
+      user = User.create!(name: 'Sérgio', email: 'sergio@email.com', password: 'sergio123')
+      warehouse = Warehouse.create(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+                                   address: 'Avenida do aeroporto, 1000', cep: '15000-000', 
+                                   description: 'Galpão destinado a cargas internacionais')
+
+      supplier = Supplier.create!(corporate_name:'ACME LTDA', brand_name: 'ACME', registration_number: '12547869', 
+                                  full_address: 'Av blah blah, 1000', city: 'Salvador', state: 'BA', email: 'contato@acme.com.br')
+
+      order = Order.create!(user: user, warehouse:warehouse, supplier:supplier, 
+                        estimated_delivery_date: 1.month.from_now) 
+      
+      original_code = order.code
+
+      #Act
+      order.update!(estimated_delivery_date: 1.year.from_now)
+                                      
+      #Assert
+      expect(order.code).to eq(original_code)
+      
+    end
+
+
   end
   
 end
